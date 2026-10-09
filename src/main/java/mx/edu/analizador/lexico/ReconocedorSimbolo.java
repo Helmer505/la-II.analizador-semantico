@@ -14,7 +14,7 @@ package mx.edu.analizador.lexico;
  */
 public class ReconocedorSimbolo implements ReconocedorToken {
 
-    // Ordenados de MAYOR a MENOR longitud: así siempre se prueba primero el más largo.
+
     private static final String[] SIMBOLOS = {
 
             "...", "##", "(", ")", "{", "}", "[", "]", ";", ",", "#"
@@ -31,7 +31,7 @@ public class ReconocedorSimbolo implements ReconocedorToken {
         int inicio = cursor.columna();
         String lexema = buscarSimbolo(cursor);
 
-        // Avanzamos tantos caracteres como mida el símbolo encontrado.
+
         for (int i = 0; i < lexema.length(); i++) {
             cursor.avanzar();
         }
@@ -40,7 +40,7 @@ public class ReconocedorSimbolo implements ReconocedorToken {
         return new Token(lexema, TipoToken.SIMBOLO, linea, inicio, fin);
     }
 
-    /** Devuelve el símbolo más largo que empieza en la posición actual, o null si no hay ninguno. */
+
     private String buscarSimbolo(Cursor cursor) {
         for (String simbolo : SIMBOLOS) {
             if (coincide(cursor, simbolo)) return simbolo;
@@ -48,7 +48,7 @@ public class ReconocedorSimbolo implements ReconocedorToken {
         return null;
     }
 
-    /** Compara, sin avanzar el cursor, si el texto que sigue es igual al símbolo. */
+
     private boolean coincide(Cursor cursor, String simbolo) {
         for (int i = 0; i < simbolo.length(); i++) {
             if (cursor.siguiente(i) != simbolo.charAt(i)) return false;
